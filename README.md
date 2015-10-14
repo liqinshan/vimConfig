@@ -11,7 +11,7 @@
 6. [powerline]()
 
 ### Python3自动补全
-python 2.x的vim插件比较多，各种文档也比较多。Python 3.x的补全插件，我主要使用neocomplete，辅以jedi。
+python 2.x的vim插件比较多，各种文档也比较多。Python 3.x的补全插件，我主要使用neocomplete，辅以jedi。  
 安装完相应插件后，配置项可以直接复制necomplete的Configuration Examples，然后稍微修改下。完整的配置参考vimrc。
 
 修改如下neocomplete配置项：
