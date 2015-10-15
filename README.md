@@ -24,3 +24,7 @@ python 2.x的vim插件比较多，各种文档也比较多。Python 3.x的补全
     let g:jedi#popup_select_first=0
     let g:jedi#auto_vim_configuration = 0
     let g:jedi#popup_on_dot = 0
+
+### 截图
+
+![](screenshot.jpg)
