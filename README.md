@@ -1,6 +1,6 @@
 ## Python3的简单vim配置
 
-### 插件管理  
+### 插件  
 主要开发工具是Pycharm，vim使用的不多，主要是写一些简单的脚本，所以使用的插件也比较有限。主要有这么几个：  
 
 1. [pathogen](https://github.com/tpope/vim-pathogen)
@@ -24,6 +24,15 @@ python 2.x的vim插件比较多，各种文档也比较多。Python 3.x的补全
     let g:jedi#popup_select_first=0
     let g:jedi#auto_vim_configuration = 0
     let g:jedi#popup_on_dot = 0
+
+### 安装
+
+为简化配置，下载后直接安装：
+
+```shell
+chmod +x install.sh
+./install.sh
+```
 
 ### 截图
 
