@@ -5,10 +5,7 @@ execute pathogen#infect()
 syntax on
 
 "使用配色方案
-"colorscheme desert
-
-set background=dark
-colorscheme base16-tomorrow
+colorscheme desert
 
 "set background=light
 "colorscheme solarized
@@ -27,6 +24,7 @@ filetype plugin indent on
 set nocp
 
 "与windows共享剪贴板
+"若在tmux中启用reattach-to-user-namespace，必须启用此配置
 set clipboard+=unnamed
 
 "取消VI兼容，VI键盘模式不易用
@@ -55,6 +53,7 @@ set selectmode=mouse,key
 
 "高亮光标所在行
 set cursorline
+hi cursorline cterm=NONE ctermbg=darkred ctermfg=white
 
 "高亮光标所在列
 "set cursorcolumn
@@ -63,7 +62,7 @@ set cursorline
 set novisualbell
 
 "总是显示状态行
-set laststatus=2
+"set laststatus=2
 
 "状态栏显示当前执行的命令
 set showcmd
@@ -104,6 +103,7 @@ set tabstop=4
 "统一缩进为4
 set softtabstop=4
 set shiftwidth=4
+set expandtab
 
 "允许使用退格键，或set backspace=2
 set backspace=eol,start,indent
@@ -122,12 +122,12 @@ set foldmethod=indent
 set nofoldenable
 
 "启用powerline
-set rtp+=/Users/dave/powerline/powerline/bindings/vim
-set noshowmode
-set t_Co=256
+"set rtp+=/Users/dave/powerline/powerline/bindings/vim
+"set noshowmode
+"set t_Co=256
 
 "powerline字体
-set encoding=utf-8
+"set encoding=utf-8
 "set guifont=Droid\ Sans\ Mono\ for\ Powerline:h15
 
 "自动补全
@@ -234,3 +234,29 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 
 let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\)\w*'
+
+" vim-tmux-navigator
+if exists('$TMUX')
+  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
+    let previous_winnr = winnr()
+    silent! execute "wincmd " . a:wincmd
+    if previous_winnr == winnr()
+      call system("tmux select-pane -" . a:tmuxdir)
+      redraw!
+    endif
+  endfunction
+
+  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
+  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
+  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
+
+  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
+  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
+  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
+  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+else
+  map <C-h> <C-w>h
+  map <C-j> <C-w>j
+  map <C-k> <C-w>k
+  map <C-l> <C-w>l
+endif
